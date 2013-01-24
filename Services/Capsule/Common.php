@@ -122,7 +122,8 @@ abstract class Services_Capsule_Common
             case 'Customfield':
             case 'Milestone':
             case 'Task':
-            
+            case 'Customfields':
+                
             $currentModule = ucfirst(strtolower($this->moduleName));
 
             if (!isset($this->subSections[$section])) {
