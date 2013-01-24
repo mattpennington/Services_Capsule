@@ -1,0 +1,15 @@
+<?php
+// :sav config.php
+/**
+ * Various configuration required to work with the 
+ * package examples.
+ */
+$config                  = array();
+//the name of your capsule application, e.g. if your capsule domain is acme.capsulecrm.com put 'acme'
+$config['appName']       = '';
+//your api token from https://acme.capsulecrm.com/users/api 
+$config['token']         = '';
+//a party id from your capsule account you can use for testing
+$config['partyId']       = 0;
+//an opportunity id from your capsule account that you can use for testing
+$config['opportunityId'] = 0;
