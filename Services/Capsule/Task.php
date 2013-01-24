@@ -139,7 +139,7 @@ class Services_Capsule_Task extends Services_Capsule_Common
         $url         = '/' . (double)$taskId . '/complete';
         
         $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_POST)
+            $url, HTTP_Request2::METHOD_POST
         );
         
         return $this->parseResponse($response);
@@ -164,7 +164,7 @@ class Services_Capsule_Task extends Services_Capsule_Common
         $url         = '/' . (double)$taskId . '/repoen';
         
         $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_POST)
+            $url, HTTP_Request2::METHOD_POST
         );
         
         return $this->parseResponse($response);
