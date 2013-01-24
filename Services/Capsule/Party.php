@@ -230,5 +230,54 @@ class Services_Capsule_Party extends Services_Capsule_Common
         $response = $this->sendRequest($url);
 
         return $this->parseResponse($response);
-    }     
+    } 
+    
+    /**
+     * Get a list of party cases
+     *
+     * This method returns a list of cases associated
+     * to a particular party.
+     *
+     * @link    /api/party/{id}/kase
+     * @throws Services_Capsule_RuntimeException
+     *
+     * @param  double       $partyId  The party to retrieve the opportunities from.
+     * @return stdClass     A stdClass object containing the information from
+     *                      the json-decoded response from the server.
+     */
+    public function listCases($partyId)
+    {
+        $url      = '/' . (double)$partyId . '/kase';
+        $response = $this->sendRequest($url);
+
+        return $this->parseResponse($response);
+    }
+    
+    /**
+     * Add a new case to a party
+     *
+     * This method is used to create a new case for a party.
+     *
+     * @link /api/party/{party-id}/kase
+     * @throws Services_Capsule_RuntimeException
+     *
+     * @param  double       $partyId       The party id to create the new case in.
+     * @param  array        $fields        An assoc array of fields to add in the new
+     *                                     case
+     *
+     * @return mixed bool|stdClass         A stdClass object containing the information from
+     *                                     the json-decoded response from the server.
+     */
+    public function addCase($partyId, array $fields)
+    {
+        
+        $url  = '/' . (double)$partyId . '/kase';
+        $case = array('kase' => $fields);
+
+        $response = $this->sendRequest(
+            $url, HTTP_Request2::METHOD_POST, json_encode($case)
+        );
+        
+        return $this->parseResponse($response);
+    }    
 }
