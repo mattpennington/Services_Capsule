@@ -5,7 +5,7 @@ include '../config.php';
 
 try {
     $capsule = new Services_Capsule($config['appName'], $config['token']);
-    $res = $capsule->party->getPeople($config['organizationId']);
+    $res = $capsule->party->listPeople($config['organizationId']);
 } catch (Services_Capsule_Exception $e) {
     print_r($e);
     die();

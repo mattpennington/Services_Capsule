@@ -210,4 +210,25 @@ class Services_Capsule_Party extends Services_Capsule_Common
 
          return $this->parseResponse($response);
      }
+     
+    /**
+     * Get a list of people in party
+     *
+     * This method returns a list of people that are associated to an 
+     * organization.
+     *
+     * @link    /api/party/{id}/people
+     * @throws Services_Capsule_RuntimeException
+     *
+     * @param  double       $partyId  The party to retrieve the people from.
+     * @return stdClass     A stdClass object containing the information from
+     *                      the json-decoded response from the server.
+     */
+    public function listPeople($partyId)
+    {
+        $url      = '/' . (double)$partyId . '/people';
+        $response = $this->sendRequest($url);
+
+        return $this->parseResponse($response);
+    }     
 }
