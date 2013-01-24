@@ -58,7 +58,7 @@
 class Services_Capsule_Person extends Services_Capsule_Common
 {
     /**
-     * Add a new Person to an organization
+     * Add a new Person to an organisation
      *
      * Create a new person and optionally attach to an organisation. 
      * You can specify an organisation id or organisation name. 
@@ -109,7 +109,7 @@ class Services_Capsule_Person extends Services_Capsule_Common
      * null and will be added to the person.
      *
      * @link http://capsulecrm.com/help/page/javelin_api_party
-     * @link /api/organization
+     * @link /api/organisation
      * @throws Services_Capsule_RuntimeException
      *
      * @param  double       $personId      The id of the person to update.

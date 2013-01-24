@@ -110,7 +110,7 @@ class Services_Capsule_Party extends Services_Capsule_Common
     }
     
     /**
-     * Search in all organization and parties
+     * Search in all organisation and parties
      *
      * Return all people & organisations which match the search term. 
      * The search term will be matched against name, telephone number 
@@ -147,7 +147,7 @@ class Services_Capsule_Party extends Services_Capsule_Common
     }
     
     /**
-     * Get any organizations/parties
+     * Get any organisations/parties
      *
      * This method is used to fetch by tag, email address, lastModified
      * with the usual start and limit parameters to limit the output.
@@ -215,7 +215,7 @@ class Services_Capsule_Party extends Services_Capsule_Common
      * Get a list of people in party
      *
      * This method returns a list of people that are associated to an 
-     * organization.
+     * organisation.
      *
      * @link    /api/party/{id}/people
      * @throws Services_Capsule_RuntimeException

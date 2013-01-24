@@ -99,7 +99,7 @@ class Services_Capsule extends Services_Capsule_Common
             case 'Kase':
             case 'Resource':
             case 'Person':
-            case 'Organization':
+            case 'Organisation':
             case 'Task':
 
             if (!isset($this->sections[$section])) {

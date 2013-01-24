@@ -169,7 +169,7 @@ Initial release
      <file name="Opportunity.php" role="php">
       <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
      </file>
-     <file name="Organization.php" role="php">
+     <file name="Organisation.php" role="php">
       <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
      </file>
      <file name="Party.php" role="php">

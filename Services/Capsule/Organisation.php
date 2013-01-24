@@ -55,12 +55,12 @@
  * @link     http://capsulecrm.com/help/page/javelin_api_party
  * @version  Release: @package_version@
  */
-class Services_Capsule_Organization extends Services_Capsule_Common
+class Services_Capsule_Organisation extends Services_Capsule_Common
 {
     /**
-     * Add a new Organization 
+     * Add a new Organisation 
      *
-     * If adding this organization will exceed the accounts contact limit 
+     * If adding this organisation will exceed the accounts contact limit 
      * a 507 Insufficient Storage response will be returned.
      * 
      * @link http://capsulecrm.com/help/page/javelin_api_party
@@ -76,7 +76,7 @@ class Services_Capsule_Organization extends Services_Capsule_Common
     public function add(array $fields)
     {        
         $url         = '';
-        $org = array('organization' => $fields);
+        $org = array('organisation' => $fields);
 
         $response = $this->sendRequest(
             $url, HTTP_Request2::METHOD_POST, json_encode($org)
@@ -86,7 +86,7 @@ class Services_Capsule_Organization extends Services_Capsule_Common
     }
     
     /**
-     * Update an organization
+     * Update an organisation
      *
      * Update an existing organisation record, only attributes that 
      * are to be changed need to be supplied in the XML document. 
@@ -100,20 +100,20 @@ class Services_Capsule_Organization extends Services_Capsule_Common
      * null and will be added to the person.
      *
      * @link http://capsulecrm.com/help/page/javelin_api_party
-     * @link /api/organization
+     * @link /api/organisation
      * @throws Services_Capsule_RuntimeException
      *
-     * @param  double       $organizationId The id of the person to update.
+     * @param  double       $organisationId The id of the person to update.
      * @param  array        $fields         An assoc array of fields to add in the new
      *                                      person
      *
      * @return mixed bool|stdClass          A stdClass object containing the information from
      *                                      the json-decoded response from the server.
      */
-    public function update($organizationId, array $fields)
+    public function update($organisationId, array $fields)
     {
-        $url          = '/' . (double)$organizationId;
-        $organization = array('organization' => $fields);
+        $url          = '/' . (double)$organisationId;
+        $organisation = array('organisation' => $fields);
 
         $response = $this->sendRequest(
             $url, HTTP_Request2::METHOD_PUT, json_encode($person)
