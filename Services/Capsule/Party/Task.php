@@ -108,9 +108,7 @@ class Services_Capsule_Party_Task extends Services_Capsule_Common
         $url         = '/' . (double)$partyId . '/task';
         $task = array('task' => $fields);
         
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_POST, json_encode($task)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $task);
         
         return $this->parseResponse($response);
     }

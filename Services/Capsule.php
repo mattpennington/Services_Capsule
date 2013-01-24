@@ -48,7 +48,7 @@ require_once 'HTTP/Request2.php';
 
 require_once 'Services/Capsule/Exception.php';
 require_once 'Services/Capsule/Common.php';
-
+require_once 'Services/Capsule/ArrayToXML.php';
 /**
  * Services_Capsule
  *
@@ -75,10 +75,11 @@ class Services_Capsule extends Services_Capsule_Common
      *
      * @param string $token  The API Token you use for your API Calls
      */
-    public function __construct($appName, $token)
+    public function __construct($appName, $token, $responseFormat = 'JSON')
     {
         $this->token   = $token;
         $this->appName = $appName;
+        $this->responseFormat = $responseFormat;
     }
 
     /**
@@ -121,6 +122,7 @@ class Services_Capsule extends Services_Capsule_Common
                 $this->sections[$section]
                     ->setToken($this->token)
                     ->setAppName($this->appName)
+                    ->setResponseFormat($this->responseFormat)
                     ->setModuleName(strtolower($section));
             }
             

@@ -102,9 +102,7 @@ class Services_Capsule_Kase_Customfields extends Services_Capsule_Common
         
         $url         = '/' . (double)$caseId . '/customfields';
 
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_PUT, json_encode($customFieldArray)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $customFieldArray);
         return $this->parseResponse($response);
     }
 }

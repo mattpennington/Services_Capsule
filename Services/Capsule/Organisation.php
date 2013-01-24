@@ -78,9 +78,7 @@ class Services_Capsule_Organisation extends Services_Capsule_Common
         $url         = '';
         $org = array('organisation' => $fields);
 
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_POST, json_encode($org)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $org);
         
         return $this->parseResponse($response);
     }
@@ -115,9 +113,7 @@ class Services_Capsule_Organisation extends Services_Capsule_Common
         $url          = '/' . (double)$organisationId;
         $organisation = array('organisation' => $fields);
 
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_PUT, json_encode($person)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $person);
         
         return $this->parseResponse($response);
     }

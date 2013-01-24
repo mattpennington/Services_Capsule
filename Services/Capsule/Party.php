@@ -274,9 +274,7 @@ class Services_Capsule_Party extends Services_Capsule_Common
         $url  = '/' . (double)$partyId . '/kase';
         $case = array('kase' => $fields);
 
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_POST, json_encode($case)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $case);
         
         return $this->parseResponse($response);
     }    

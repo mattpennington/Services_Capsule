@@ -101,7 +101,7 @@ class Services_Capsule_Party_History extends Services_Capsule_Common
             ),
         );
 
-        $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, json_encode($note));
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $note);
         return $this->parseResponse($response);
     }
     
@@ -130,7 +130,7 @@ class Services_Capsule_Party_History extends Services_Capsule_Common
             ),
         );
         
-        $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, json_encode($note));
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $note);
         return $this->parseResponse($response);
     }
     

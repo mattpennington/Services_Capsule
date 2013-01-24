@@ -198,9 +198,7 @@ class Services_Capsule_Task extends Services_Capsule_Common
         $url         = '';
         $task = array('task' => $fields);
         
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_POST, json_encode($task)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $task);
         
         return $this->parseResponse($response);
     }
@@ -230,9 +228,7 @@ class Services_Capsule_Task extends Services_Capsule_Common
         $url          = '/' . (double)$taskId;
         $task = array('task' => $fields);
 
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_PUT, json_encode($task)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $task);
         
         return $this->parseResponse($response);
     }

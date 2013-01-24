@@ -87,9 +87,7 @@ class Services_Capsule_Person extends Services_Capsule_Common
         $url         = '';
         $person = array('person' => $fields);
 
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_POST, json_encode($person)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $person);
         
         return $this->parseResponse($response);
     }
@@ -124,9 +122,7 @@ class Services_Capsule_Person extends Services_Capsule_Common
         $url         = '/' . (double)$personId;
         $person      = array('person' => $fields);
 
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_PUT, json_encode($person)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $person);
         
         return $this->parseResponse($response);
     }

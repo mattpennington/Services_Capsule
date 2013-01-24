@@ -113,8 +113,7 @@ class Services_Capsule_Party_Opportunity extends Services_Capsule_Common
         $opportunity = array('opportunity' => $fields);
         
         $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_POST, json_encode($opportunity)
-        );
+            $url, HTTP_Request2::METHOD_POST, $opportunity);
         
         return $this->parseResponse($response);
     }
@@ -145,9 +144,7 @@ class Services_Capsule_Party_Opportunity extends Services_Capsule_Common
         $url         = '/' . (double)$partyId . '/opportunity';
         $opportunity = array('opportunity' => $fields);
         
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_PUT, json_encode($opportunity)
-        );
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $opportunity);
         
         return $this->parseResponse($response);
     }

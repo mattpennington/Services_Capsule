@@ -99,7 +99,14 @@ abstract class Services_Capsule_Common
      * @see $this->appName 
      * @var string The web service endpoint.
      */
-    protected $endpoint = 'https://%s.capsulecrm.com/api/%s';
+    protected $endpoint = 'https://%s.capsulecrm.com/api/%s';   
+
+    /**
+     * The communication method (XML,JSON,ARRY)
+     *
+     * @var string Set to XML,JSON or Array, defaults to JSON
+     */
+    protected $responseFormat;
     
     /**
      * Magical Getter
@@ -146,6 +153,7 @@ abstract class Services_Capsule_Common
             $this->subSections[$section]
                 ->setToken($this->token)
                 ->setAppName($this->appName)
+                ->setResponseFormat($this->responseFormat)
                 ->setModuleName(strtolower($currentModule));
 
             return $this->subSections[$section];
@@ -205,6 +213,21 @@ abstract class Services_Capsule_Common
         $this->moduleName = $moduleName;
         return $this;
     }
+ 
+    /**
+     * Set the format
+     * 
+     * This method is used to set the format (JSON or XML) that the
+     * child will be invoking.
+     *
+     * @param  string $format The format to use.
+     * @return object $this
+     */
+    public function setResponseFormat($responseFormat)
+    {
+        $this->responseFormat = $responseFormat;
+        return $this;
+    }    
     
     /**
      * Send the request to the capsule web service
@@ -243,15 +266,33 @@ abstract class Services_Capsule_Common
         $finalUrl = sprintf($this->endpoint, $this->appName, $this->moduleName);
         $finalUrl = $finalUrl . $url;
 
-        $this->client
-             ->setHeader('Content-Type: application/json')
-             ->setHeader('Accept: application/json')
-             ->setAuth($this->token, 'x')
-             ->setMethod($method)
-             ->setUrl($finalUrl);
-             
+        if($this->responseFormat=='XML' || $this->responseFormat=='ARRY'){
+            $this->client
+                ->setHeader('Content-Type: application/xml')
+                ->setHeader('Accept: application/xml')
+                ->setAuth($this->token, 'x')
+                ->setMethod($method)
+                ->setUrl($finalUrl);            
+        }
+        else{
+            $this->client
+                ->setHeader('Content-Type: application/json')
+                ->setHeader('Accept: application/json')
+                ->setAuth($this->token, 'x')
+                ->setMethod($method)
+                ->setUrl($finalUrl);
+        }     
         if (!is_null($data)) {
-            $this->client->setBody($data);
+            
+            if($this->responseFormat=='XML' || $this->responseFormat=='ARRY'){
+                $xml = new ArrayToXML();
+                $return = $xml->toXML($body);                
+            }
+            else{
+                $encoded_data = json_encode($data);
+            }
+            
+            $this->client->setBody($encoded_data);
         }
         
         try {
@@ -279,18 +320,49 @@ abstract class Services_Capsule_Common
     protected function parseResponse(HTTP_Request2_Response $response)
     {
         $body = $response->getBody();
-        $return = json_decode($body);
-        
-        if (!($return instanceof stdClass)) {
-            if ($response->getStatus() == 201 || $response->getStatus() == 200) {
-                return true;
-            }
+        print_r($body);
+        if($this->responseFormat=='ARRY'){
+            $xml = new ArrayToXML();
+            $return = $xml->toArray($body);
             
-            throw new Services_Capsule_RuntimeException(
-                'Invalid response with no valid json body'
-            );
+            if (!is_array($return)) {
+                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
+                    return true;
+                }
+
+                throw new Services_Capsule_RuntimeException(
+                    'Invalid response - could not create an array to return'
+                );
+            }             
         }
-        
+        elseif($this->responseFormat=='XML'){
+            if (is_string($body)){
+                $return = new SimpleXMLElement($body);
+            }
+            if (!($return instanceof SimpleXMLElement)) {
+                
+                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
+                    return true;
+                }
+
+                throw new Services_Capsule_RuntimeException(
+                    'Invalid response with no valid xml body'
+                );
+            }             
+        }        
+        else{
+            $return = json_decode($body);
+            
+            if (!($return instanceof stdClass)) {
+                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
+                    return true;
+                }
+
+                throw new Services_Capsule_RuntimeException(
+                    'Invalid response with no valid json body'
+                );
+            }            
+        }
         return $return;
     }
 }
