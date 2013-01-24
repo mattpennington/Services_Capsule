@@ -13,3 +13,5 @@ $config['token']         = '';
 $config['partyId']       = 0;
 //an opportunity id from your capsule account that you can use for testing
 $config['opportunityId'] = 0;
+//an organisation id from your capsule account you can use for testing
+$config['organizationId'] = 0;
