@@ -1,10 +1,7 @@
 <?php
-set_include_path(
-    get_include_path() . PATH_SEPARATOR . 
-    dirname(dirname(dirname(__FILE__))));
-
+set_include_path(get_include_path() . PATH_SEPARATOR . (dirname(dirname(dirname(dirname(dirname(__FILE__)))))));
 require_once 'Services/Capsule.php';
-include dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config.php';
+include '../config.php';
 
 $appName = $config['appName'];
 $token   = $config['token']; // Get that from the website
