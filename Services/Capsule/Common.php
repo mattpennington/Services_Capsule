@@ -320,7 +320,7 @@ abstract class Services_Capsule_Common
     protected function parseResponse(HTTP_Request2_Response $response)
     {
         $body = $response->getBody();
-        print_r($body);
+        //print_r($body);
         if($this->responseFormat=='ARRY'){
             $xml = new ArrayToXML();
             $return = $xml->toArray($body);
