@@ -329,9 +329,13 @@ abstract class Services_Capsule_Common
                 $return = $xml->toArray($body);
             }
             else{
-                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
-                    return true;
+                if ($response->getStatus() == 201) {
+                    $header = $response->getHeader();
+                    return substr(strrchr($header['location'], '/'), 1 );
                 }
+                elseif($response->getStatus() == 200) {
+                    return true;
+                } 
 
                 throw new Services_Capsule_RuntimeException(
                     'Invalid response with no valid xml body'
@@ -343,9 +347,13 @@ abstract class Services_Capsule_Common
                 $return = new SimpleXMLElement($body);
             }
             else{
-                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
-                    return true;
+                if ($response->getStatus() == 201) {
+                    $header = $response->getHeader();
+                    return substr(strrchr($header['location'], '/'), 1 );
                 }
+                elseif($response->getStatus() == 200) {
+                    return true;
+                } 
 
                 throw new Services_Capsule_RuntimeException(
                     'Invalid response with no valid xml body'
@@ -356,9 +364,13 @@ abstract class Services_Capsule_Common
             $return = $body;
             
             if (!($return instanceof stdClass)) {
-                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
-                    return true;
+                if ($response->getStatus() == 201) {
+                    $header = $response->getHeader();
+                    return substr(strrchr($header['location'], '/'), 1 );
                 }
+                elseif($response->getStatus() == 200) {
+                    return true;
+                } 
 
                 throw new Services_Capsule_RuntimeException(
                     'Invalid response with no valid json body'
@@ -369,9 +381,13 @@ abstract class Services_Capsule_Common
             $return = json_decode($body);
             
             if (!($return instanceof stdClass)) {
-                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
-                    return true;
+                if ($response->getStatus() == 201) {
+                    $header = $response->getHeader();
+                    return substr(strrchr($header['location'], '/'), 1 );
                 }
+                elseif($response->getStatus() == 200) {
+                    return true;
+                } 
 
                 throw new Services_Capsule_RuntimeException(
                     'Invalid response with no valid json body'
