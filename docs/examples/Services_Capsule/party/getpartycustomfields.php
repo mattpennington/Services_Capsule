@@ -4,7 +4,7 @@ require_once 'Services/Capsule.php';
 include '../config.php';
 
 try {
-    $capsule = new Services_Capsule($config['appName'], $config['token'], 'ARRY');
+    $capsule = new Services_Capsule($config['appName'], $config['token']);
     $res = $capsule->party->customfields->get($config['organisationId']);
 } catch (Services_Capsule_Exception $e) {
     print_r($e);
