@@ -286,7 +286,7 @@ abstract class Services_Capsule_Common
             
             if($this->responseFormat=='XML' || $this->responseFormat=='ARRY'){
                 $xml = new ArrayToXML();
-                $return = $xml->toXML($body);                
+                $encoded_data = $xml->toXML($data);                
             }
             else{
                 $encoded_data = json_encode($data);
