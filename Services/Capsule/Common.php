@@ -285,13 +285,18 @@ abstract class Services_Capsule_Common
         if (!is_null($data)) {
             
             if($this->responseFormat=='XML' || $this->responseFormat=='ARRY'){
+                if(!is_array($data)){
+                    //$data = (array) $data;
+                    $json  = json_encode($data);
+                    $data = json_decode($json, true);
+                }
                 $xml = new ArrayToXML();
-                $encoded_data = $xml->toXML($data);                
+                $encoded_data = $xml->toXML($data,$this->moduleName);                
             }
             else{
+                $data = array($this->moduleName => $data);
                 $encoded_data = json_encode($data);
             }
-            
             $this->client->setBody($encoded_data);
         }
         
@@ -320,35 +325,33 @@ abstract class Services_Capsule_Common
     protected function parseResponse(HTTP_Request2_Response $response)
     {
         $body = $response->getBody();
-        //print_r($body);
         if($this->responseFormat=='ARRY'){
-            $xml = new ArrayToXML();
-            $return = $xml->toArray($body);
-            
-            if (!is_array($return)) {
-                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
-                    return true;
-                }
-
-                throw new Services_Capsule_RuntimeException(
-                    'Invalid response - could not create an array to return'
-                );
-            }             
-        }
-        elseif($this->responseFormat=='XML'){
-            if (is_string($body)){
-                $return = new SimpleXMLElement($body);
+            if(strlen($body)>0){
+                $return = $xml->toArray($body);
             }
-            if (!($return instanceof SimpleXMLElement)) {
-                
+            else{
                 if ($response->getStatus() == 201 || $response->getStatus() == 200) {
                     return true;
                 }
 
                 throw new Services_Capsule_RuntimeException(
                     'Invalid response with no valid xml body'
-                );
-            }             
+                );                
+            }            
+        }
+        elseif($this->responseFormat=='XML'){
+            if(strlen($body)>0){
+                $return = new SimpleXMLElement($body);
+            }
+            else{
+                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
+                    return true;
+                }
+
+                throw new Services_Capsule_RuntimeException(
+                    'Invalid response with no valid xml body'
+                );                
+            }          
         }        
         else{
             $return = json_decode($body);

@@ -268,11 +268,10 @@ class Services_Capsule_Party extends Services_Capsule_Common
      * @return mixed bool|stdClass         A stdClass object containing the information from
      *                                     the json-decoded response from the server.
      */
-    public function addCase($partyId, array $fields)
+    public function addCase($partyId, $case)
     {
         
         $url  = '/' . (double)$partyId . '/kase';
-        $case = array('kase' => $fields);
 
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $case);
         

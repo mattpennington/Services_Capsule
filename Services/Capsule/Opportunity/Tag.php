@@ -96,6 +96,7 @@ class Services_Capsule_Opportunity_Tag extends Services_Capsule_Common
     public function add($opportunityId, $tagName)
     {
         $url = '/' . (double)$opportunityId . '/tag/' . urlencode($tagName);
+        
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST);
         
         return $this->parseResponse($response);

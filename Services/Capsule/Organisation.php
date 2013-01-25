@@ -73,11 +73,10 @@ class Services_Capsule_Organisation extends Services_Capsule_Common
      * @return mixed bool|stdClass         A stdClass object containing the information from
      *                                     the json-decoded response from the server.
      */
-    public function add(array $fields)
+    public function add($org)
     {        
         $url         = '';
-        $org = array('organisation' => $fields);
-
+        
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $org);
         
         return $this->parseResponse($response);
@@ -108,12 +107,11 @@ class Services_Capsule_Organisation extends Services_Capsule_Common
      * @return mixed bool|stdClass          A stdClass object containing the information from
      *                                      the json-decoded response from the server.
      */
-    public function update($organisationId, array $fields)
+    public function update($organisationId, $organisation)
     {
         $url          = '/' . (double)$organisationId;
-        $organisation = array('organisation' => $fields);
 
-        $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $person);
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $organisation);
         
         return $this->parseResponse($response);
     }

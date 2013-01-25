@@ -96,6 +96,7 @@ class Services_Capsule_Opportunity_Party extends Services_Capsule_Common
     public function add($opportunityId, $partyId)
     {
         $url = '/' . (double)$opportunityId . '/party/' . (double)$partyId;
+        
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST);
         
         return $this->parseResponse($response);

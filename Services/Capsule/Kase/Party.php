@@ -96,6 +96,7 @@ class Services_Capsule_Kase_Party extends Services_Capsule_Common
     public function add($caseId, $partyId)
     {
         $url = '/' . (double)$caseId . '/party/' . (double)$partyId;
+        
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST);
         
         return $this->parseResponse($response);

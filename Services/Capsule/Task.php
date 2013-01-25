@@ -193,11 +193,10 @@ class Services_Capsule_Task extends Services_Capsule_Common
      * @return mixed bool|stdClass         A stdClass object containing the information from
      *                                     the json-decoded response from the server.
      */
-    public function add($fields)
+    public function add($task)
     {
         $url         = '';
-        $task = array('task' => $fields);
-        
+
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $task);
         
         return $this->parseResponse($response);
@@ -223,10 +222,9 @@ class Services_Capsule_Task extends Services_Capsule_Common
      * @return mixed bool|stdClass          A stdClass object containing the information from
      *                                      the json-decoded response from the server.
      */
-    public function update($taskId, array $fields)
+    public function update($taskId, $task)
     {
         $url          = '/' . (double)$taskId;
-        $task = array('task' => $fields);
 
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $task);
         

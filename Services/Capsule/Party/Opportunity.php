@@ -107,13 +107,11 @@ class Services_Capsule_Party_Opportunity extends Services_Capsule_Common
      * @return mixed bool|stdClass         A stdClass object containing the information from
      *                                     the json-decoded response from the server.
      */
-    public function add($partyId, $fields)
+    public function add($partyId, $opportunity)
     {
         $url         = '/' . (double)$partyId . '/opportunity';
-        $opportunity = array('opportunity' => $fields);
-        
-        $response = $this->sendRequest(
-            $url, HTTP_Request2::METHOD_POST, $opportunity);
+
+        $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $opportunity);
         
         return $this->parseResponse($response);
     }

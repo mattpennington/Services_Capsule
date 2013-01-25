@@ -82,10 +82,9 @@ class Services_Capsule_Person extends Services_Capsule_Common
      * @return mixed bool|stdClass         A stdClass object containing the information from
      *                                     the json-decoded response from the server.
      */
-    public function add(array $fields)
+    public function add($person)
     {        
         $url         = '';
-        $person = array('person' => $fields);
 
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $person);
         
@@ -117,10 +116,9 @@ class Services_Capsule_Person extends Services_Capsule_Common
      * @return mixed bool|stdClass         A stdClass object containing the information from
      *                                     the json-decoded response from the server.
      */
-    public function update($personId, array $fields)
+    public function update($personId, $person)
     {
         $url         = '/' . (double)$personId;
-        $person      = array('person' => $fields);
 
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_PUT, $person);
         

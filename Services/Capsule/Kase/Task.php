@@ -101,11 +101,10 @@ class Services_Capsule_Kase_Task extends Services_Capsule_Common
      * @return mixed bool|stdClass        A stdClass object containing the information from
      *                                    the json-decoded response from the server.
      */
-    public function add($kaseId, $fields)
+    public function add($kaseId, $task)
     {
         $url         = '/' . (double)$kaseId . '/task';
-        $task = array('task' => $fields);
-        
+
         $response = $this->sendRequest($url, HTTP_Request2::METHOD_POST, $task);
         
         return $this->parseResponse($response);
