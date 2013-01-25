@@ -102,9 +102,9 @@ abstract class Services_Capsule_Common
     protected $endpoint = 'https://%s.capsulecrm.com/api/%s';   
 
     /**
-     * The communication method (XML,JSON,ARRY)
+     * The format we want the response in (XML,JSON,ARRY,STDC)
      *
-     * @var string Set to XML,JSON or Array, defaults to JSON
+     * @var string Set to XML,JSON,Array or StdClass. Defaults to StdClass
      */
     protected $responseFormat;
     
@@ -286,7 +286,6 @@ abstract class Services_Capsule_Common
             
             if($this->responseFormat=='XML' || $this->responseFormat=='ARRY'){
                 if(!is_array($data)){
-                    //$data = (array) $data;
                     $json  = json_encode($data);
                     $data = json_decode($json, true);
                 }
@@ -352,6 +351,19 @@ abstract class Services_Capsule_Common
                     'Invalid response with no valid xml body'
                 );                
             }          
+        }  
+        elseif($this->responseFormat=='JSON'){
+            $return = $body;
+            
+            if (!($return instanceof stdClass)) {
+                if ($response->getStatus() == 201 || $response->getStatus() == 200) {
+                    return true;
+                }
+
+                throw new Services_Capsule_RuntimeException(
+                    'Invalid response with no valid json body'
+                );
+            }            
         }        
         else{
             $return = json_decode($body);
