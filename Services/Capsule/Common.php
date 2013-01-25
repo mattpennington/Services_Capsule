@@ -71,6 +71,9 @@ abstract class Services_Capsule_Common
      */
     protected $moduleName;
     
+    
+    protected $sectionName;
+    
     /**
      * The identification token
      * 
@@ -120,7 +123,6 @@ abstract class Services_Capsule_Common
     public function __get($section)
     {
         $section = ucwords(strtolower($section));
-        
         switch ($section) {
             case 'History':
             case 'Tag':
@@ -149,11 +151,12 @@ abstract class Services_Capsule_Common
 
                 $this->subSections[$section] = new $classname;
             }
-            
+        
             $this->subSections[$section]
                 ->setToken($this->token)
                 ->setAppName($this->appName)
                 ->setResponseFormat($this->responseFormat)
+                ->setSectionName($section)
                 ->setModuleName(strtolower($currentModule));
 
             return $this->subSections[$section];
@@ -213,7 +216,17 @@ abstract class Services_Capsule_Common
         $this->moduleName = $moduleName;
         return $this;
     }
- 
+
+    /**
+     * Set the section name
+     * 
+     */
+    public function setSectionName($sectionName)
+    {
+        $this->sectionName = $sectionName;
+        return $this;
+    }
+    
     /**
      * Set the format
      * 
@@ -283,19 +296,25 @@ abstract class Services_Capsule_Common
                 ->setUrl($finalUrl);
         }     
         if (!is_null($data)) {
-            
+
+            //if section is customfields need to tidy up sectionname
+            if($this->sectionName=='customfields' || $this->sectionName=='Customfields'){
+                $this->sectionName = 'customFields';
+            }
+
             if($this->responseFormat=='XML' || $this->responseFormat=='ARRY'){
                 if(!is_array($data)){
                     $json  = json_encode($data);
                     $data = json_decode($json, true);
                 }
                 $xml = new ArrayToXML();
-                $encoded_data = $xml->toXML($data,$this->moduleName);                
+                $encoded_data = $xml->toXML($data,$this->sectionName);                
             }
             else{
-                $data = array($this->moduleName => $data);
+                $data = array($this->sectionName => $data);
                 $encoded_data = json_encode($data);
             }
+            echo $encoded_data;
             $this->client->setBody($encoded_data);
         }
         
@@ -323,6 +342,7 @@ abstract class Services_Capsule_Common
      */
     protected function parseResponse(HTTP_Request2_Response $response)
     {
+        print_r($response);
         $body = $response->getBody();
         if($this->responseFormat=='ARRY'){
             if(strlen($body)>0){

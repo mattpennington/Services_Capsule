@@ -94,6 +94,7 @@ class Services_Capsule extends Services_Capsule_Common
     public function __get($section)
     {
         $section = ucwords(strtolower($section));
+
         switch ($section) {
             case 'Party':
             case 'Opportunity':
@@ -118,11 +119,13 @@ class Services_Capsule extends Services_Capsule_Common
                 }
 
                 $this->sections[$section] = new $classname;
-                
+
+
                 $this->sections[$section]
                     ->setToken($this->token)
                     ->setAppName($this->appName)
                     ->setResponseFormat($this->responseFormat)
+                    ->setSectionName($section)
                     ->setModuleName(strtolower($section));
             }
             
