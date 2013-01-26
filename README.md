@@ -14,7 +14,7 @@ Although forked from the Service_Capsule library, do not expect to be able to dr
 
 ##Changelog:
 
-##Changes to Custom Fields
+#Changes to Custom Fields
 
 The following Methods have been removed:
 
@@ -52,10 +52,10 @@ opportunity->customfields->set
 party->listPeople
 party->listCases
 
-##Added support to return a response in 3 extra formats:
+#Added support to return a response in 3 extra formats:
 
 XML - Returns a SimpleXMLElement
 JSON - Returns results as JSON
 ARRY - Returns an Array
 
-##Added support to pass either an Array or an stdClass object into add/update methods.
+#Added support to pass either an Array or an stdClass object into add/update methods.
