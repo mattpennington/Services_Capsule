@@ -5,17 +5,15 @@ include '../config.php';
 
 $customFields = array();
 $customFields['customField'] = array();
-$customFields['customField'][] = array('label'=>'company_role_type','text' => 1);
-//$customFields['customField'][] = array('label'=>'subcountry','text' => 1);
-/*$customFields['subcountry'] = 1;
-$customFields['opt_out_tel'] = 1;
-$customFields['opt_out_fax'] = 1;
-$customFields['opt_out_email'] = 1;
-$customFields['pc_id'] = 123465;*/
+//adding/updating custom field
+$customFields['customField'][] = array('label'=>'[some custom field name]','text' => 'some text if your custom field is a text field, otherwise use date or boolean as appropriate');
+//deleting a custom field
+$customFields['customField'][] = array('label'=>'[some custom field name]');
+
 
 try {
     $capsule = new Services_Capsule($config['appName'], $config['token']);
-    $res = $capsule->party->customfields->set('35510433',$customFields);
+    $res = $capsule->party->customfields->set($config['partyId'],$customFields);
 } catch (Services_Capsule_Exception $e) {
     print_r($e);
     die();

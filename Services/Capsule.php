@@ -75,7 +75,7 @@ class Services_Capsule extends Services_Capsule_Common
      *
      * @param string $token  The API Token you use for your API Calls
      */
-    public function __construct($appName, $token, $responseFormat = 'JSON')
+    public function __construct($appName, $token, $responseFormat = 'STDC')
     {
         $this->token   = $token;
         $this->appName = $appName;

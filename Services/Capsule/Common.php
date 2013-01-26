@@ -301,6 +301,9 @@ abstract class Services_Capsule_Common
             if($this->sectionName=='customfields' || $this->sectionName=='Customfields'){
                 $this->sectionName = 'customFields';
             }
+            else{
+                $this->sectionName = strtolower($this->sectionName);
+            }
 
             if($this->responseFormat=='XML' || $this->responseFormat=='ARRY'){
                 if(!is_array($data)){
@@ -314,7 +317,7 @@ abstract class Services_Capsule_Common
                 $data = array($this->sectionName => $data);
                 $encoded_data = json_encode($data);
             }
-            echo $encoded_data;
+            //echo $encoded_data;
             $this->client->setBody($encoded_data);
         }
         
@@ -342,7 +345,9 @@ abstract class Services_Capsule_Common
      */
     protected function parseResponse(HTTP_Request2_Response $response)
     {
-        print_r($response);
+        //echo "<br />";
+        //print_r($response);
+        //echo "<br />";
         $body = $response->getBody();
         if($this->responseFormat=='ARRY'){
             if(strlen($body)>0){
@@ -399,7 +404,8 @@ abstract class Services_Capsule_Common
         }        
         else{
             $return = json_decode($body);
-            
+            //echo 'here';
+            //print_r($return);
             if (!($return instanceof stdClass)) {
                 if ($response->getStatus() == 201) {
                     $header = $response->getHeader();
