@@ -1,72 +1,61 @@
 ## Introduction
-This is the PHP API Wrapper that allows developers to access the Capsule CRM api using PHP
 
-## Examples
+This is the PHP API Wrapper that allows developers to access the Capsule CRM API using PHP.
 
-Get a **party** by party id:
+It is forked from the Service_Capsule library.
 
-    require_once 'Services/Capsule.php';
-    
-    try {
-        $capsule = new Services_Capsule('appName', 'token');
-        $party   = $capsule->party->get('partyId');
-    } catch (Services_Capsule_Exception $e) {
-        print_r($e);
-    }
-    
-    print_r($party);
+##Disclaimer
 
-Get all **party**:
+This is still a work in progress and is far from finished.
 
-    require_once 'Services/Capsule.php';
-    
-    try {
-        $capsule = new Services_Capsule('appName', 'token');
-        $parties = $capsule->party->getList();
-    } catch (Services_Capsule_Exception $e) {
-        print_r($e);
-    }
-    
-    print_r($parties);
-    
-Get a list of people in a **party**:
+Most work so far has concentrated on improving the core functionality of parties,people and organisations.
 
-    require_once 'Services/Capsule.php';
-    
-    try {
-        $capsule = new Services_Capsule('appName', 'token');
-        $people  = $capsule->party->people->getAll('partyId');
-    } catch (Services_Capsule_Exception $e) {
-        print_r($e);
-    }
+Although forked from the Service_Capsule library, do not expect to be able to drop this library straight into your project, as many behaviours and responses have been altered.
 
-    print_r($people);
+##Changelog:
 
+##Changes to Custom Fields
 
-Add a new history note to a **party**:
+The following Methods have been removed:
 
-    require_once 'Services/Capsule.php';
+party->customfield->get
+party->customfield->add
+party->customfield->update
+party->customfield->delete
 
-    try {
-        $capsule = new Services_Capsule('appName', 'token');
-        $note  = $capsule->party->history->addNote(
-            'partyId', 'This is a test note.'
-        );
-    } catch (Services_Capsule_Exception $e) {
-        print_r($e);
-    }
+kase->customfield->get
+kase->customfield->add
+kase->customfield->update
+kase->customfield->delete
 
-    var_dump($note); // This will be true if success
-    
-Get a list of **opportunity**:
+opportunity->customfield->get
+opportunity->customfield->add
+opportunity->customfield->update
+opportunity->customfield->delete
 
-    require_once 'Services/Capsule.php';
+party->people->getAll
+party->cases->getAll
+party->cases->Add
+party->cases->update
 
-    try {
-        $capsule = new Services_Capsule('appName', 'token');
-        $opps  = $capsule->opportunity->getList();
-    } catch (Services_Capsule_Exception $e) {
-        print_r($e);
-    }
+The following methods have been added:
 
-    print_r($opps);
+party->customfields->get
+party->customfields->set
+
+kase->customfields->get
+kase->customfields->set
+
+opportunity->customfields->get
+opportunity->customfields->set
+
+party->listPeople
+party->listCases
+
+##Added support to return a response in 3 extra formats:
+
+XML - Returns a SimpleXMLElement
+JSON - Returns results as JSON
+ARRY - Returns an Array
+
+##Added support to pass either an Array or an stdClass object into add/update methods.
