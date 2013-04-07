@@ -47,7 +47,7 @@ A few minor changes to overcome some bugs were then made by David Pitman at the 
 I have also made a few minor changes.
  
 */
-class ArrayToXML
+class Services_Capsule_ArrayToXML
 {
     /**
      * The main function for converting to an XML document.
