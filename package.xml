@@ -83,12 +83,6 @@ Initial release
         <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
        </file>
       </dir> <!-- /docs/examples/Services_Capsule/party -->
-      <file name="config.php" role="doc">
-       <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-      </file>
-      <file name="config.php.tpl" role="doc">
-       <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-      </file>
      </dir> <!-- /docs/examples/Services_Capsule -->
     </dir> <!-- /docs/examples -->
    </dir> <!-- /docs -->
@@ -135,9 +129,6 @@ Initial release
       </file>
      </dir> <!-- /Services/Capsule/Opportunity -->
      <dir name="Party">
-      <file name="Cases.php" role="php">
-       <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-      </file>
       <file name="Customfield.php" role="php">
        <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
       </file>
@@ -147,9 +138,6 @@ Initial release
       <file name="Opportunity.php" role="php">
        <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
       </file>
-      <file name="People.php" role="php">
-       <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-      </file>
       <file name="Tag.php" role="php">
        <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
       </file>
@@ -157,6 +145,9 @@ Initial release
        <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
       </file>
      </dir> <!-- /Services/Capsule/Party -->
+     <file name="ArrayToXML.php" role="php">
+      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
+     </file>
      <file name="Common.php" role="php">
       <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
      </file>
@@ -200,9 +191,6 @@ Initial release
      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
     </file>
     <file name="CapsuleTestCase.php" role="test">
-     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-    </file>
-    <file name="config.ini" role="test">
      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
     </file>
     <file name="config.ini-dist" role="test">
