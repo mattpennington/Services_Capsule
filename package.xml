@@ -202,9 +202,6 @@ Initial release
     <file name="CapsuleTestCase.php" role="test">
      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
     </file>
-    <file name="config.ini" role="test">
-     <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
-    </file>
     <file name="config.ini-dist" role="test">
      <tasks:replace from="@PEAR-VER@" to="version" type="package-info" />
     </file>
